@@ -1,0 +1,20 @@
+[package]
+name = "wpbrute-rs"
+version = "0.1.0"
+authors = ["Leo Le Bouter <lle-bout@zaclys.net>"]
+edition = "2018"
+description = """
+An high performance WordPress login bruteforcer with automatic concurrency for maximum amount of tries per second.
+"""
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = { version = "=0.2.0-alpha.6", features = ["rt-full"] }
+futures = "0.3.1"
+reqwest = "0.10.0-alpha.2"
+anyhow = "1.0.25"
+clap = "2.33.0"
+
+[patch.crates-io]
+futures = { git = "https://github.com/leo-lb/futures-rs.git", branch = "buffer-unordered-adaptable" }
