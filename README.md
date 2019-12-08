@@ -1,6 +1,10 @@
 # wpbrute-rs
 High performance WordPress login bruteforcer with automatic concurrency for maximum amount of tries per second.
 
+# Demo
+
+![Demo](demo.gif)
+
 # How to install?
 
 * Install Rust with https://rustup.rs/ or your system's package repositories.
