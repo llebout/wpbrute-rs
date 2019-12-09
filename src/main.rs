@@ -32,6 +32,12 @@ async fn try_login(
             .send()
             .await
         {
+            Ok(response) if response.status().is_client_error() => {
+                eprintln!("Remote target ({}) says we are sending erroneous requests.", target)
+            }
+            Ok(response) if response.status().is_server_error() => {
+                eprintln!("Remote target ({}) has returned a server error.", target)
+            }
             Ok(response) => {
                 let set_cookie = response.headers().get_all("Set-Cookie");
 
