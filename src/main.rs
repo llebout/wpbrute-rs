@@ -32,9 +32,10 @@ async fn try_login(
             .send()
             .await
         {
-            Ok(response) if response.status().is_client_error() => {
-                eprintln!("Remote target ({}) says we are sending erroneous requests.", target)
-            }
+            Ok(response) if response.status().is_client_error() => eprintln!(
+                "Remote target ({}) says we are sending erroneous requests.",
+                target
+            ),
             Ok(response) if response.status().is_server_error() => {
                 eprintln!("Remote target ({}) has returned a server error.", target)
             }
@@ -85,6 +86,12 @@ async fn print_metrics(
         } else if previous_requests_per_second < temp {
             n_concurrent.fetch_add(1, Ordering::SeqCst);
         } else if previous_requests_per_second > temp {
+            if n_concurrent_loaded > 1 {
+                n_concurrent.fetch_sub(1, Ordering::SeqCst);
+            }
+        }
+
+        if previous_requests_per_second == 0 {
             if n_concurrent_loaded > 1 {
                 n_concurrent.fetch_sub(1, Ordering::SeqCst);
             }
