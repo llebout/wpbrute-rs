@@ -59,7 +59,7 @@ async fn try_login(
             Err(e) => eprintln!("{:#?}", e),
         }
 
-        tokio::timer::delay_for(std::time::Duration::from_secs(5)).await;
+        tokio::time::delay_for(std::time::Duration::from_secs(5)).await;
     }
 }
 
@@ -68,7 +68,7 @@ async fn print_metrics(
     total_requests: Arc<AtomicUsize>,
     requests_per_second: Arc<AtomicUsize>,
 ) -> Result<()> {
-    let mut next_round = std::time::Instant::now();
+    let mut next_round = tokio::time::Instant::now();
 
     let mut previous_requests_per_second = 0;
     let mut stdout = tokio::io::stdout();
@@ -109,7 +109,7 @@ async fn print_metrics(
 
         stdout.write_all(data.as_bytes()).await?;
         stdout.flush().await?;
-        tokio::timer::delay(next_round).await;
+        tokio::time::delay_until(next_round).await;
     }
 }
 
