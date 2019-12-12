@@ -36,3 +36,9 @@ OPTIONS:
 # Example
 
 `$ wpbrute-rs -w /usr/share/wordlists/rockyou.txt -t http://wordpress.example.local/wp-login.php`
+
+# Password lists
+
+To use this program, you need password lists, here's some places where you can find some:
+
+- [https://github.com/berzerk0/Probable-Wordlists](https://github.com/berzerk0/Probable-Wordlists)
