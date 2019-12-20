@@ -18,4 +18,4 @@ clap = "2.33.0"
 
 [patch.crates-io]
 futures = { git = "https://github.com/leo-lb/futures-rs.git", branch = "buffer-unordered-adaptable" }
-reqwest = { git = "https://github.com/seanmonstar/reqwest.git" }
+reqwest = { git = "https://github.com/seanmonstar/reqwest.git", rev = "382f1c0e6a21a20fa826db616168e9eb52727246" }
