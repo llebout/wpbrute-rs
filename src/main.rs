@@ -85,16 +85,12 @@ async fn print_metrics(
             // Do nothing.
         } else if previous_requests_per_second < temp {
             n_concurrent.fetch_add(1, Ordering::SeqCst);
-        } else if previous_requests_per_second > temp {
-            if n_concurrent_loaded > 1 {
-                n_concurrent.fetch_sub(1, Ordering::SeqCst);
-            }
+        } else if previous_requests_per_second > temp && n_concurrent_loaded > 1 {
+            n_concurrent.fetch_sub(1, Ordering::SeqCst);
         }
 
-        if previous_requests_per_second == 0 {
-            if n_concurrent_loaded > 1 {
-                n_concurrent.fetch_sub(1, Ordering::SeqCst);
-            }
+        if previous_requests_per_second == 0 && n_concurrent_loaded > 1 {
+            n_concurrent.fetch_sub(1, Ordering::SeqCst);
         }
 
         previous_requests_per_second = temp;
@@ -164,7 +160,7 @@ async fn main() -> Result<()> {
 
     let client = reqwest::ClientBuilder::new()
         .default_headers(headers)
-        .redirect(reqwest::RedirectPolicy::none())
+        .redirect(reqwest::redirect::Policy::none())
         .build()?;
 
     let n_concurrent = Arc::new(AtomicUsize::new(4));

@@ -12,10 +12,9 @@ An high performance WordPress login bruteforcer with automatic concurrency for m
 [dependencies]
 tokio = { version = "0.2.4", features = ["full"] }
 futures = "0.3.1"
-reqwest = "0.10.0-alpha.2"
+reqwest = "0.10.0"
 anyhow = "1.0.25"
 clap = "2.33.0"
 
 [patch.crates-io]
 futures = { git = "https://github.com/leo-lb/futures-rs.git", branch = "buffer-unordered-adaptable" }
-reqwest = { git = "https://github.com/seanmonstar/reqwest.git", rev = "382f1c0e6a21a20fa826db616168e9eb52727246" }
