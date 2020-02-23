@@ -10,10 +10,10 @@ An high performance WordPress login bruteforcer with automatic concurrency for m
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-tokio = { version = "0.2.4", features = ["full"] }
-futures = "0.3.1"
-reqwest = "0.10.0"
-anyhow = "1.0.25"
+tokio = { version = "0.2.11", features = ["full"] }
+futures = "0.3.4"
+reqwest = "0.10.2"
+anyhow = "1.0.26"
 clap = "2.33.0"
 
 [patch.crates-io]
